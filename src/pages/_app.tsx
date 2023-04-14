@@ -7,7 +7,7 @@ const theme = createTheme({
     MuiTextField: {
       styleOverrides: {
         root: {
-          marginBottom: "10px",
+          margin: "10px 0",
           color: "red",
         },
       },
