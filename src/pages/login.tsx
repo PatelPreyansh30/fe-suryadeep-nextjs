@@ -12,7 +12,6 @@ const Login = () => {
         <TextField
           label="Username"
           required
-          margin="dense"
           fullWidth
           id=""
           variant="outlined"
@@ -21,12 +20,13 @@ const Login = () => {
           label="Password"
           type="password"
           required
-          margin="normal"
           fullWidth
           id=""
           variant="outlined"
         />
-        <Button color="primary" fullWidth variant="contained">Login</Button>
+        <Button fullWidth variant="contained">
+          Login
+        </Button>
       </div>
     </div>
   );
