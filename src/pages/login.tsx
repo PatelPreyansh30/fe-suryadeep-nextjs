@@ -1,8 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
-import { AccountCircle, Lock } from "@mui/icons-material";
+import {
+  AccountCircle,
+  Lock,
+  Visibility,
+  VisibilityOff,
+} from "@mui/icons-material";
+import { toastError, toastSuccess } from "@/utils/toastify";
+import appClient from "@/network/AppClient";
+import {
+  APIConstant,
+  ApplicationConstant,
+} from "@/applicationConstant/constant";
+import { useRouter } from "next/router";
 
 const Login = () => {
+  const [isPasswordShow, setIsPasswordShow] = useState(false);
+  const router = useRouter();
+
+  const handleOnClick = async () => {
+    appClient
+      .post(APIConstant.LOGIN_API, {
+        username: "abcd",
+        password: "12345",
+      })
+      .then((res) => {
+        localStorage.setItem(
+          ApplicationConstant.ACCESS_TOKEN,
+          res.data.accessToken
+        );
+        router.replace(ApplicationConstant.DASHBOARD_PATH);
+      })
+      .catch(() => {
+        toastError("Please try again!!");
+      });
+  };
+
   return (
     <div className="h-screen flex items-center justify-center">
       <div className="login-box">
@@ -16,23 +49,34 @@ const Login = () => {
           required
           fullWidth
           InputProps={{
-            startAdornment: <AccountCircle />,
+            startAdornment: <AccountCircle sx={{ marginRight: "10px" }} />,
           }}
           id=""
           variant="outlined"
         />
         <TextField
           label="Password"
-          type="password"
+          type={isPasswordShow ? "password" : "text"}
           required
           fullWidth
           InputProps={{
-            startAdornment: <Lock />,
+            startAdornment: <Lock sx={{ marginRight: "10px" }} />,
+            endAdornment: isPasswordShow ? (
+              <Visibility
+                onClick={() => setIsPasswordShow(!isPasswordShow)}
+                sx={{ cursor: "pointer", marginLeft: "10px" }}
+              />
+            ) : (
+              <VisibilityOff
+                onClick={() => setIsPasswordShow(!isPasswordShow)}
+                sx={{ cursor: "pointer", marginLeft: "10px" }}
+              />
+            ),
           }}
           id=""
           variant="outlined"
         />
-        <Button fullWidth variant="contained">
+        <Button onClick={handleOnClick} fullWidth variant="contained">
           Login
         </Button>
       </div>

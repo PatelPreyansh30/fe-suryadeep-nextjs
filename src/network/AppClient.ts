@@ -21,12 +21,12 @@ appClient.interceptors.response.use(
   (error) => {
     if (error.response) {
       switch (error.response.status) {
-        case 400:
-          toastError(error.response.data.msg);
-          break;
-        case 401:
-          toastError(error.response.data.details);
-          break;
+        // case 400:
+        //   toastError(error.response.data.msg);
+        //   break;
+        // case 401:
+        //   toastError(error.response.data.detail);
+          // break;
         case 404:
           // handle not found error
           break;
@@ -38,7 +38,7 @@ appClient.interceptors.response.use(
           break;
       }
     } else {
-      toastWarning("Server not responding, please try again after some time!!");
+      toastWarning("Server error, Try again after some time!!");
     }
 
     return Promise.reject(error);
