@@ -1,9 +1,10 @@
-const ApplicationConstant = {
+export const ApplicationConstant = {
   ACCESS_TOKEN: "accessToken",
   LOGIN_PATH: "/login",
   DASHBOARD_PATH: "/dashboard",
 };
 
-const APIConstant = {
-  Auth_API: "/auth",
+export const APIConstant = {
+  BASE_API_URL: "http://127.0.0.1:8000",
+  LOGIN_API: "/auth/jwt/create",
 };
