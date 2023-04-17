@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TextField, Button } from "@mui/material";
 import {
   AccountCircle,
@@ -25,6 +25,12 @@ const Login = () => {
 
   const router = useRouter();
 
+  useEffect(() => {
+    if (localStorage.getItem(ApplicationConstant.ACCESS_TOKEN)) {
+      router.replace("/dashboard");
+    }
+  });
+
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
     setLoginInput((prevState) => ({ ...prevState, [name]: value }));
@@ -44,11 +50,7 @@ const Login = () => {
     authClient
       .post(APIConstant.LOGIN_API, loginInput)
       .then((res) => {
-        console.log(res.data)
-        localStorage.setItem(
-          ApplicationConstant.ACCESS_TOKEN,
-          res.data.access
-        );
+        localStorage.setItem(ApplicationConstant.ACCESS_TOKEN, res.data.access);
         router.replace(ApplicationConstant.DASHBOARD_PATH);
       })
       .catch(() => {
