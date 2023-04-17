@@ -3,3 +3,8 @@ export interface InitialAuthType {
   username: string;
   email: string;
 }
+
+export interface LoginInputType {
+  username: string;
+  password: string;
+}

@@ -14,6 +14,7 @@ import {
 } from "@/applicationConstant/constant";
 import { useRouter } from "next/router";
 import { LoginInputType } from "@/types/authTypes";
+import { joiUtilObject } from "@/utils/joi";
 
 const Login = () => {
   const [isPasswordShow, setIsPasswordShow] = useState(false);
@@ -29,13 +30,24 @@ const Login = () => {
     setLoginInput((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const handleOnClick = async () => {
+  const validateLoginInputs = async () => {
+    const validationResult: any = joiUtilObject.validateLoginData(loginInput);
+    if (!validationResult.true) {
+      callLoginAPI();
+      return;
+    }
+    toastError(validationResult.error);
+    return;
+  };
+
+  const callLoginAPI = async () => {
     authClient
       .post(APIConstant.LOGIN_API, loginInput)
       .then((res) => {
+        console.log(res.data)
         localStorage.setItem(
           ApplicationConstant.ACCESS_TOKEN,
-          res.data.accessToken
+          res.data.access
         );
         router.replace(ApplicationConstant.DASHBOARD_PATH);
       })
@@ -68,7 +80,7 @@ const Login = () => {
           label="Password"
           name="password"
           onChange={handleOnChange}
-          type={isPasswordShow ? "password" : "text"}
+          type={isPasswordShow ? "text" : "password"}
           required
           fullWidth
           InputProps={{
@@ -88,7 +100,7 @@ const Login = () => {
           id=""
           variant="outlined"
         />
-        <Button onClick={handleOnClick} fullWidth variant="contained">
+        <Button onClick={validateLoginInputs} fullWidth variant="contained">
           Login
         </Button>
       </div>
