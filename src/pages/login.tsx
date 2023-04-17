@@ -7,23 +7,31 @@ import {
   VisibilityOff,
 } from "@mui/icons-material";
 import { toastError, toastSuccess } from "@/utils/toastify";
-import appClient from "@/network/AppClient";
+import authClient from "@/network/authClient";
 import {
   APIConstant,
   ApplicationConstant,
 } from "@/applicationConstant/constant";
 import { useRouter } from "next/router";
+import { LoginInputType } from "@/types/authTypes";
 
 const Login = () => {
   const [isPasswordShow, setIsPasswordShow] = useState(false);
+  const [loginInput, setLoginInput] = useState<LoginInputType>({
+    username: "",
+    password: "",
+  });
+
   const router = useRouter();
 
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.currentTarget;
+    setLoginInput((prevState) => ({ ...prevState, [name]: value }));
+  };
+
   const handleOnClick = async () => {
-    appClient
-      .post(APIConstant.LOGIN_API, {
-        username: "abcd",
-        password: "12345",
-      })
+    authClient
+      .post(APIConstant.LOGIN_API, loginInput)
       .then((res) => {
         localStorage.setItem(
           ApplicationConstant.ACCESS_TOKEN,
@@ -46,6 +54,8 @@ const Login = () => {
         <p className="text-red-500 mb-2">* Required fields</p>
         <TextField
           label="Username"
+          name="username"
+          onChange={handleOnChange}
           required
           fullWidth
           InputProps={{
@@ -56,6 +66,8 @@ const Login = () => {
         />
         <TextField
           label="Password"
+          name="password"
+          onChange={handleOnChange}
           type={isPasswordShow ? "password" : "text"}
           required
           fullWidth
