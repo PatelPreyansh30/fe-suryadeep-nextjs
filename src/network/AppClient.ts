@@ -1,16 +1,18 @@
+import axios from "axios";
 import {
   APIConstant,
   ApplicationConstant,
 } from "@/applicationConstant/constant";
-import { toastError, toastWarning } from "@/utils/toastify";
-import axios from "axios";
+import { toastError } from "@/utils/toastify";
 
 const appClient = axios.create({
-  baseURL: APIConstant.BASE_API_URL,
+  baseURL: APIConstant.BASE_APP_API_URL,
 });
 
 appClient.interceptors.request.use(
   (config) => {
+    const accessToken = localStorage.getItem(ApplicationConstant.ACCESS_TOKEN);
+    config.headers["Authorization"] = `JWT ${accessToken}`;
     return config;
   },
   (error) => Promise.reject(error)
@@ -21,12 +23,12 @@ appClient.interceptors.response.use(
   (error) => {
     if (error.response) {
       switch (error.response.status) {
-        // case 400:
-        //   toastError(error.response.data.msg);
-        //   break;
-        // case 401:
-        //   toastError(error.response.data.detail);
-          // break;
+        case 400:
+          toastError(error.response.data.msg);
+          break;
+        case 401:
+          // handle unauthorized error
+          break;
         case 404:
           // handle not found error
           break;
@@ -38,21 +40,13 @@ appClient.interceptors.response.use(
           break;
       }
     } else {
-      toastWarning("Server error, Try again after some time!!");
+      toastError(
+        "Some network error occured, please try again after some time."
+      );
     }
 
     return Promise.reject(error);
   }
 );
-
-export const initializeAuthData = async () => {
-  const accessToken = localStorage.getItem(ApplicationConstant.ACCESS_TOKEN);
-  if (!accessToken) {
-    localStorage.clear();
-    sessionStorage.clear();
-    return false;
-  }
-  return true;
-};
 
 export default appClient;

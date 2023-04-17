@@ -5,6 +5,7 @@ export const ApplicationConstant = {
 };
 
 export const APIConstant = {
-  BASE_API_URL: "http://127.0.0.1:8000",
-  LOGIN_API: "/auth/jwt/create",
+  BASE_AUTH_API_URL: "http://127.0.0.1:8000/auth",
+  BASE_APP_API_URL: "http://127.0.0.1:8000/core",
+  LOGIN_API: "/jwt/create",
 };
