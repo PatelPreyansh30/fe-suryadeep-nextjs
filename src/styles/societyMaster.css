@@ -1,0 +1,33 @@
+.society-master-main-box {
+    border: 1px solid;
+    border-radius: 4px;
+}
+
+.society-master-main-box>h2 {
+    padding: 5px 0;
+    font-size: 26px;
+    font-weight: 600;
+    text-align: center;
+    border-bottom: 1px solid;
+    color: white;
+    background-color: #247B7B;
+}
+
+.society-master-main-box>div {
+    padding: 10px;
+}
+
+.society-master-main-box>div>div {
+    display: flex;
+    align-items: center;
+}
+
+.society-master-main-box>div>section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.society-master-main-box>div>div>label {
+    margin-right: 10px;
+}
