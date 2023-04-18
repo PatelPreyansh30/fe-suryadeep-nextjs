@@ -15,6 +15,7 @@ import {
 import { useRouter } from "next/router";
 import { LoginInputType } from "@/types/authTypes";
 import { joiUtilObject } from "@/utils/joi";
+import { RequiredFields } from "@/commonComponents/RequiredStar";
 
 const Login = () => {
   const [isPasswordShow, setIsPasswordShow] = useState(false);
@@ -65,7 +66,7 @@ const Login = () => {
           <span className="text-red-500">SURYADEEP</span> COMPLEX
         </p>
         <hr />
-        <p className="text-red-500 mb-2">* Required fields</p>
+        <RequiredFields />
         <TextField
           label="Username"
           name="username"
