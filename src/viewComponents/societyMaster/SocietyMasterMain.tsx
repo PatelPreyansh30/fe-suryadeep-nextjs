@@ -17,7 +17,11 @@ const SocietyMasterMain = () => {
 
   return (
     <div>
-      <SocietyMasterBox />
+      {societyDetails ? (
+        <SocietyMasterBox societyDetails={societyDetails} />
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
