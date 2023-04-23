@@ -1,11 +1,12 @@
 import appClient from "@/network/appClient";
-import { SocietyDetailType } from "@/types/authTypes";
+import { MasterSocietyDetailType } from "@/types/authTypes";
 import React, { useEffect, useState } from "react";
 import SocietyMasterBox from "./SocietyMasterBox";
 import NotAvailable from "@/commonComponents/NotAvailable";
 
 const SocietyMasterMain = () => {
-  const [societyDetails, setSocietyDetails] = useState(undefined);
+  const [societyDetails, setSocietyDetails] =
+    useState<MasterSocietyDetailType[]>();
 
   const getSocietyDetails: any = async () => {
     const res = await appClient.get("/society");

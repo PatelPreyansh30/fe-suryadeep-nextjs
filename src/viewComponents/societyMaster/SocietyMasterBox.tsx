@@ -1,6 +1,6 @@
 import ForwardBackwardBtn from "@/commonComponents/ForwardBackwardBtn";
 import { RequiredFields, RequiredStar } from "@/commonComponents/RequiredStar";
-import { SocietyDetailType } from "@/types/authTypes";
+import { MasterSocietyDetailType } from "@/types/authTypes";
 import { Delete, Save, Update } from "@mui/icons-material";
 import { Button, TextField, Tooltip } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -14,9 +14,9 @@ export const initialSocietyInputState = {
   society_mobile: "",
 };
 
-const SocietyMasterBox = (props: { societyDetails: SocietyDetailType[] }) => {
+const SocietyMasterBox = (props: { societyDetails: MasterSocietyDetailType[] }) => {
   const [singleSocietyDetailInput, setSingleSocietyDetailInput] =
-    useState<SocietyDetailType>(initialSocietyInputState);
+    useState<MasterSocietyDetailType>(initialSocietyInputState);
   const [goBackNextState, setGoBackNextState] = useState<number>(0);
 
   useEffect(() => {
