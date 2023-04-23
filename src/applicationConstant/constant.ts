@@ -2,7 +2,8 @@ export const ApplicationConstant = {
   ACCESS_TOKEN: "accessToken",
   LOGIN_PATH: "/login",
   DASHBOARD_PATH: "/dashboard",
-  SOCIETY_MASTER_PATH: "/dashboard/society-master"
+  SOCIETY_MASTER_PATH: "/dashboard/society-master",
+  MEMBER_MASTER_PATH: "/dashboard/member-master",
 };
 
 export const APIConstant = {

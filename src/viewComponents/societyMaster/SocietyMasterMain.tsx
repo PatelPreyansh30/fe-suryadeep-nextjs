@@ -7,7 +7,7 @@ import NotAvailable from "@/commonComponents/NotAvailable";
 const SocietyMasterMain = () => {
   const [societyDetails, setSocietyDetails] = useState(undefined);
 
-  const getSocietyDetails = async () => {
+  const getSocietyDetails: any = async () => {
     const res = await appClient.get("/society");
     setSocietyDetails(res.data);
   };

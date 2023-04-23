@@ -50,7 +50,7 @@ const Header = () => {
           },
           {
             label: "Member Master",
-            link: "",
+            link: ApplicationConstant.MEMBER_MASTER_PATH,
           },
         ]}
       />
