@@ -1,4 +1,4 @@
-import Header from "@/commonComponents/header";
+import Header from "@/commonComponents/Header";
 import React from "react";
 
 const dashboard = () => {
