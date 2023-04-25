@@ -1,9 +1,9 @@
-.society-master-main-box {
+.master-main-box {
     border: 1px solid;
     border-radius: 4px;
 }
 
-.society-master-main-box>h2 {
+.master-main-box-h2 {
     padding: 5px 0;
     font-size: 26px;
     font-weight: 600;
@@ -13,21 +13,21 @@
     background-color: #247B7B;
 }
 
-.society-master-main-box>div {
+.master-field-box {
     padding: 10px;
 }
 
-.society-master-main-box>div>div {
+.master-input-box {
     display: flex;
     align-items: center;
 }
 
-.society-master-main-box>div>section{
+.master-field-box-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.society-master-main-box>div>div>label {
+.master-input-box-label {
     margin-right: 10px;
 }

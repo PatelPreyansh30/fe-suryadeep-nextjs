@@ -14,7 +14,9 @@ export const initialSocietyInputState = {
   society_mobile: "",
 };
 
-const SocietyMasterBox = (props: { societyDetails: MasterSocietyDetailType[] }) => {
+const SocietyMasterBox = (props: {
+  societyDetails: MasterSocietyDetailType[];
+}) => {
   const [singleSocietyDetailInput, setSingleSocietyDetailInput] =
     useState<MasterSocietyDetailType>(initialSocietyInputState);
   const [goBackNextState, setGoBackNextState] = useState<number>(0);
@@ -71,8 +73,8 @@ const SocietyMasterBox = (props: { societyDetails: MasterSocietyDetailType[] }) 
     <>
       <RequiredFields />
       {societyInputData.map((item, index) => (
-        <div key={`society-master-index:${index}`}>
-          <label htmlFor={item.name}>
+        <div className="master-input-box" key={`society-master-index:${index}`}>
+          <label className="master-input-box-label" htmlFor={item.name}>
             {item.label}
             <RequiredStar isShow={item.required} />:
           </label>
@@ -89,7 +91,7 @@ const SocietyMasterBox = (props: { societyDetails: MasterSocietyDetailType[] }) 
           />
         </div>
       ))}
-      <section>
+      <section className="master-field-box-section">
         <ForwardBackwardBtn
           arrayLength={props.societyDetails.length}
           nextBackState={goBackNextState}

@@ -19,9 +19,9 @@ const SocietyMasterMain = () => {
 
   return (
     <div>
-      <div className="society-master-main-box">
-        <h2>Society Information</h2>
-        <div>
+      <div className="master-main-box">
+        <h2 className="master-main-box-h2">Society Information</h2>
+        <div className="master-field-box">
           {societyDetails ? (
             <SocietyMasterBox societyDetails={societyDetails} />
           ) : (
