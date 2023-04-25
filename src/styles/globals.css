@@ -3,7 +3,7 @@
 @tailwind utilities;
 @import url("login.css");
 @import url("header.css");
-@import url("societyMaster.css");
+@import url("master.css");
 
 * {
   margin: 0;

@@ -4,6 +4,9 @@ import { MasterMemberDetailType, MemberDetailType } from "@/types/authTypes";
 import { Delete, Save, Update } from "@mui/icons-material";
 import { Button, TextField, Tooltip } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import MemberMasterBankDetail from "./MemberMasterBankDetail";
+import MemberMasterTransferDetail from "./MemberMasterTransferDetail";
+import MemberMasterNomineeDetail from "./MemberMasterNomineeDetail";
 
 const MemberMasterBox = (props: { memberDetails: MemberDetailType[] }) => {
   const [masterMemberDetail, setMasterMemberDetail] =
@@ -89,6 +92,16 @@ const MemberMasterBox = (props: { memberDetails: MemberDetailType[] }) => {
           />
         </div>
       ))}
+
+      <MemberMasterBankDetail
+        memberMasterBankDetails={props.memberDetails[goBackNextState].bank}
+      />
+      <MemberMasterTransferDetail
+        memberMasterTransferDetails={props.memberDetails[goBackNextState].transfer}
+      />
+      <MemberMasterNomineeDetail
+        memberMasterNomineeDetails={props.memberDetails[goBackNextState].nominee}
+      />
 
       <section className="master-field-box-section">
         <ForwardBackwardBtn
