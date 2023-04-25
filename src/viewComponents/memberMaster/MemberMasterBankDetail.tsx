@@ -14,8 +14,10 @@ const MemberMasterBankDetail = (props: {
   memberMasterBankDetails: MasterBankDetailType[];
 }) => {
   return (
-    <section className="master-nested-section">
-      <p className="master-nested-section-heading">Member Bank Deatils</p>
+    <fieldset className="master-nested-section">
+      <legend className="master-nested-section-heading">
+        Member Bank Deatils
+      </legend>
       <div className="master-field-box">
         {props.memberMasterBankDetails.length != 0 ? (
           <TableContainer>
@@ -58,7 +60,7 @@ const MemberMasterBankDetail = (props: {
           <NotAvailable label="Member bank detail" />
         )}
       </div>
-    </section>
+    </fieldset>
   );
 };
 

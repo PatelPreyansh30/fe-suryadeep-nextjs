@@ -14,8 +14,8 @@ const MemberMasterNomineeDetail = (props: {
   memberMasterNomineeDetails: MasterNomineeDetailType[];
 }) => {
   return (
-    <section className="master-nested-section">
-      <p className="master-nested-section-heading">Apartment Nominee Details</p>
+    <fieldset className="master-nested-section">
+      <legend className="master-nested-section-heading">Apartment Nominee Details</legend>
       <div className="master-field-box">
         {props.memberMasterNomineeDetails.length != 0 ? (
           <TableContainer>
@@ -50,7 +50,7 @@ const MemberMasterNomineeDetail = (props: {
           <NotAvailable label="Apartment nominee detail" />
         )}
       </div>
-    </section>
+    </fieldset>
   );
 };
 

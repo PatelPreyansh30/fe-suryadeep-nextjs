@@ -14,10 +14,10 @@ const MemberMasterTransferDetail = (props: {
   memberMasterTransferDetails: MasterTransferDetailType[];
 }) => {
   return (
-    <section className="master-nested-section">
-      <p className="master-nested-section-heading">
+    <fieldset className="master-nested-section">
+      <legend className="master-nested-section-heading">
         Apartment Transfer Details
-      </p>
+      </legend>
       <div className="master-field-box">
         {props.memberMasterTransferDetails.length != 0 ? (
           <TableContainer>
@@ -52,7 +52,7 @@ const MemberMasterTransferDetail = (props: {
           <NotAvailable label="Apartment transfer detail" />
         )}
       </div>
-    </section>
+    </fieldset>
   );
 };
 
