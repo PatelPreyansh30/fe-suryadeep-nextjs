@@ -7,100 +7,38 @@ import React, { useEffect, useState } from "react";
 import MemberMasterBankDetail from "./MemberMasterBankDetail";
 import MemberMasterTransferDetail from "./MemberMasterTransferDetail";
 import MemberMasterNomineeDetail from "./MemberMasterNomineeDetail";
+import MemberMasterMemberDetail from "./MemberMasterMemberDetail";
 
 const MemberMasterBox = (props: { memberDetails: MemberDetailType[] }) => {
-  const [masterMemberDetail, setMasterMemberDetail] =
-    useState<MasterMemberDetailType>({
-      member_id: 0,
-      member_name: "",
-      member_email: "",
-      member_mobile: "",
-      member_alternative_mobile: "",
-      member_business: "",
-      member_death_date: "",
-    });
   const [goBackNextState, setGoBackNextState] = useState<number>(0);
 
-  useEffect(() => {
-    setMasterMemberDetail(props.memberDetails[goBackNextState].member);
-  }, [props.memberDetails, goBackNextState]);
-
-  const memberDetailsInputFields = [
-    {
-      label: "Member ID",
-      name: "member_id",
-      type: "text",
-      required: true,
-    },
-    {
-      label: "Member Name",
-      name: "member_name",
-      type: "text",
-      required: true,
-    },
-    {
-      label: "Member Email",
-      name: "member_email",
-      type: "email",
-      required: false,
-    },
-    {
-      label: "Member Mobile",
-      name: "member_mobile",
-      type: "text",
-      required: true,
-    },
-    {
-      label: "Member Alternate Mobile",
-      name: "member_alternative_mobile",
-      type: "text",
-      required: false,
-    },
-    {
-      label: "Member Business",
-      name: "member_business",
-      type: "text",
-      required: false,
-    },
-    {
-      label: "Member Death Date",
-      name: "member_death_date",
-      type: "date",
-      required: false,
-    },
-  ];
   return (
     <>
       <RequiredFields />
-
-      {memberDetailsInputFields.map((item, index) => (
-        <div className="master-input-box" key={`member-master-index:${index}`}>
-          <label className="master-input-box-label" htmlFor={item.name}>
-            {item.label}
-            <RequiredStar isShow={item.required} />:
-          </label>
-          <TextField
-            name={item.name}
-            value={(masterMemberDetail as any)[item.name] || ""}
-            id={item.name}
-            type={item.type}
-            // onChange={handleTextInputChange}
-            required={item.required}
-            sx={{ width: "70%" }}
-            variant="outlined"
-            size="small"
-          />
-        </div>
-      ))}
-
+      <MemberMasterMemberDetail
+        memberMasterMemberDetails={props.memberDetails[goBackNextState].member}
+        memberMasterApartmentNumber={
+          props.memberDetails[goBackNextState].apartment_number
+        }
+        memberMasterApartmentAddress={
+          props.memberDetails[goBackNextState].apartment_address
+        }
+        memberMasterApartmentAllotedDate={
+          props.memberDetails[goBackNextState].apartment_alloted_date
+        }
+      />
       <MemberMasterBankDetail
         memberMasterBankDetails={props.memberDetails[goBackNextState].bank}
       />
       <MemberMasterTransferDetail
-        memberMasterTransferDetails={props.memberDetails[goBackNextState].transfer}
+        memberMasterTransferDetails={
+          props.memberDetails[goBackNextState].transfer
+        }
       />
       <MemberMasterNomineeDetail
-        memberMasterNomineeDetails={props.memberDetails[goBackNextState].nominee}
+        memberMasterNomineeDetails={
+          props.memberDetails[goBackNextState].nominee
+        }
       />
 
       <section className="master-field-box-section">

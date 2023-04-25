@@ -1,0 +1,37 @@
+/* Color */
+
+/* Grid */
+.grid {
+    display: grid;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+/* Flex */
+.flex {
+    display: flex;
+}
+
+/* Gap */
+.gap-10 {
+    column-gap: 10px;
+}
+.gap-20 {
+    column-gap: 20px;
+}
+
+/* Align Items */
+.align-items-center {
+    align-items: center;
+}
+.align-items-flex-start{
+    align-items: flex-start;
+}
+
+/* Justify Content */
+.justify-content-flex-start{
+    justify-content: flex-start;
+}
