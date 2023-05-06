@@ -3,6 +3,7 @@ import { MasterSocietyDetailType } from "@/types/authTypes";
 import React, { useEffect, useState } from "react";
 import SocietyMasterBox from "./SocietyMasterBox";
 import NotAvailable from "@/commonComponents/NotAvailable";
+import MainBox from "@/commonComponents/MainBox";
 
 const SocietyMasterMain = () => {
   const [societyDetails, setSocietyDetails] =
@@ -19,16 +20,16 @@ const SocietyMasterMain = () => {
 
   return (
     <div>
-      <div className="master-main-box">
-        <h2 className="master-main-box-h2">Society Information</h2>
-        <div className="master-field-box">
-          {societyDetails ? (
+      <MainBox
+        heading="Society Information"
+        component={
+          societyDetails ? (
             <SocietyMasterBox societyDetails={societyDetails} />
           ) : (
             <NotAvailable label="Society data" />
-          )}
-        </div>
-      </div>
+          )
+        }
+      />
     </div>
   );
 };

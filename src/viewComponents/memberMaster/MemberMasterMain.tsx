@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import MemberMasterBox from "./MemberMasterBox";
 import { MemberDetailType } from "@/types/authTypes";
 import appClient from "@/network/appClient";
+import MainBox from "@/commonComponents/MainBox";
 
 const MemberMasterMain = () => {
   const [memberDetails, setMemberDetails] = useState<MemberDetailType[]>();
@@ -18,16 +19,16 @@ const MemberMasterMain = () => {
 
   return (
     <div>
-      <div className="master-main-box">
-        <h2 className="master-main-box-h2">Member Information</h2>
-        <div className="master-field-box">
-          {memberDetails ? (
+      <MainBox
+        heading="Member Information"
+        component={
+          memberDetails ? (
             <MemberMasterBox memberDetails={memberDetails} />
           ) : (
             <NotAvailable label="Members data" />
-          )}
-        </div>
-      </div>
+          )
+        }
+      />
     </div>
   );
 };
