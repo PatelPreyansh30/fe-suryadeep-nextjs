@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { ApplicationConstant } from "@/applicationConstant/constant";
+import Head from "next/head";
 
 const theme = createTheme({
   components: {
@@ -27,12 +28,15 @@ export default function App({ Component, pageProps }: AppProps) {
       router.replace("/dashboard");
     }
     router.replace("/login");
-  },[]);
+  }, []);
 
   return (
     <>
       <ToastContainer autoClose={2500} newestOnTop theme="colored" />
       <ThemeProvider theme={theme}>
+        <Head>
+          <title>Suryadeep Complex</title>
+        </Head>
         <Component {...pageProps} />
       </ThemeProvider>
     </>
