@@ -115,6 +115,10 @@ const Header = () => {
             label: "New Month Process",
             link: "",
           },
+          {
+            label: "Add Water Readings",
+            link: ApplicationConstant.ADD_WATER_READING_PATH,
+          },
         ]}
       />
     </div>
