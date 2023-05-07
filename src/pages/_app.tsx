@@ -6,6 +6,8 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { ApplicationConstant } from "@/applicationConstant/constant";
 import Head from "next/head";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 const theme = createTheme({
   components: {
@@ -34,10 +36,12 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <ToastContainer autoClose={2500} newestOnTop theme="colored" />
       <ThemeProvider theme={theme}>
-        <Head>
-          <title>Suryadeep Complex</title>
-        </Head>
-        <Component {...pageProps} />
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <Head>
+            <title>Suryadeep Complex</title>
+          </Head>
+          <Component {...pageProps} />
+        </LocalizationProvider>
       </ThemeProvider>
     </>
   );
