@@ -1,7 +1,11 @@
+import { ApplicationConstant } from "@/applicationConstant/constant";
 import Link from "next/link";
 import React, { useState } from "react";
 
-const HeaderMenu = (props: { heading: string; options: string[] }) => {
+const HeaderMenu = (props: {
+  heading: string;
+  options: { label: string; link: string }[];
+}) => {
   const [isOptionShow, setIsOptionShow] = useState(false);
 
   const toggleIsOptionShow = () => {
@@ -16,12 +20,12 @@ const HeaderMenu = (props: { heading: string; options: string[] }) => {
         <div onMouseLeave={toggleIsOptionShow}>
           {props.options.map((item, index) => (
             <Link
-              href={"/dashboard/society-master"}
+              href={item.link}
               onClick={toggleIsOptionShow}
               className="header-main-menu-option"
               key={`header-menu-option:${index}`}
             >
-              {item}
+              {item.label}
             </Link>
           ))}
         </div>
@@ -35,19 +39,87 @@ const Header = () => {
     <div className="">
       <HeaderMenu
         heading="Master"
-        options={["Society Master", "User Master", "Member Master"]}
+        options={[
+          {
+            label: "Society Master",
+            link: ApplicationConstant.SOCIETY_MASTER_PATH,
+          },
+          {
+            label: "User Master",
+            link: "",
+          },
+          {
+            label: "Member Master",
+            link: ApplicationConstant.MEMBER_MASTER_PATH,
+          },
+        ]}
       />
       <HeaderMenu
         heading="Transaction"
-        options={["Account Transaction", "Purchase Transaction", "Sales Transaction", "Member Receipt Transaction", "Billing Transaction"]}
+        options={[
+          {
+            label: "Account Transaction",
+            link: "",
+          },
+          {
+            label: "Purchase Transaction",
+            link: "",
+          },
+          {
+            label: "Sales Transaction",
+            link: "",
+          },
+          {
+            label: "Member Receipt Transaction",
+            link: "",
+          },
+          {
+            label: "Billing Transaction",
+            link: "",
+          },
+        ]}
       />
       <HeaderMenu
         heading="Reports"
-        options={["Account Reports", "Purchase Reports", "Sales Reports", "Member Reports", "Billing Reports"]}
+        options={[
+          {
+            label: "Account Reports",
+            link: "",
+          },
+          {
+            label: "Purchase Reports",
+            link: "",
+          },
+          {
+            label: "Sales Reports",
+            link: "",
+          },
+          {
+            label: "Member Reports",
+            link: "",
+          },
+          {
+            label: "Billing Reports",
+            link: "",
+          },
+        ]}
       />
       <HeaderMenu
         heading="Utilities"
-        options={["Begin New Year", "New Month Process"]}
+        options={[
+          {
+            label: "Begin New Year",
+            link: "",
+          },
+          {
+            label: "New Month Process",
+            link: "",
+          },
+          {
+            label: "Add Water Readings",
+            link: ApplicationConstant.ADD_WATER_READING_PATH,
+          },
+        ]}
       />
     </div>
   );

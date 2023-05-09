@@ -1,127 +1,141 @@
+import ForwardBackwardBtn from "@/commonComponents/ForwardBackwardBtn";
 import { RequiredFields, RequiredStar } from "@/commonComponents/RequiredStar";
-import {
-  ArrowBackIosNew,
-  ArrowForwardIos,
-  Delete,
-  Save,
-  Update,
-} from "@mui/icons-material";
-import { Button, IconButton, TextField, Tooltip } from "@mui/material";
-import React from "react";
+import { MasterSocietyDetailType } from "@/types/authTypes";
+import { Delete, Save, Update } from "@mui/icons-material";
+import { Button, TextField, Tooltip } from "@mui/material";
+import React, { useEffect, useState } from "react";
 
-const SocietyMasterBox = () => {
+export const initialSocietyInputState = {
+  society_id: 0,
+  society_name: "",
+  society_address: "",
+  society_registration_code: "",
+  society_registration_date: "",
+  society_mobile: "",
+};
+
+const SocietyMasterBox = (props: {
+  societyDetails: MasterSocietyDetailType[];
+}) => {
+  const [singleSocietyDetailInput, setSingleSocietyDetailInput] =
+    useState<MasterSocietyDetailType>(initialSocietyInputState);
+  const [goBackNextState, setGoBackNextState] = useState<number>(0);
+
+  useEffect(() => {
+    setSingleSocietyDetailInput(props.societyDetails[goBackNextState]);
+  }, [goBackNextState, setSingleSocietyDetailInput, props.societyDetails]);
+
+  const handleTextInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.currentTarget;
+    setSingleSocietyDetailInput((prev) => ({ ...prev, [name]: value }));
+  };
+
   const societyInputData = [
     {
       label: "Society Code",
-      name: "societyCode",
+      name: "society_id",
       type: "text",
       required: true,
     },
     {
       label: "Society Name",
-      name: "societyName",
+      name: "society_name",
       type: "text",
       required: true,
     },
     {
       label: "Society Address",
-      name: "societyAddress",
+      name: "society_address",
       type: "text",
       required: true,
     },
     {
       label: "Society Mobile",
-      name: "societyMobile",
+      name: "society_mobile",
       type: "text",
       required: false,
     },
     {
       label: "Society Registration Number",
-      name: "societyRegistrationNumber",
+      name: "society_registration_code",
       type: "text",
       required: true,
     },
     {
       label: "Society Registration Date",
-      name: "societyRegistrationDate",
-      type: "text",
+      name: "society_registration_date",
+      type: "date",
       required: true,
     },
   ];
+
   return (
-    <div className="society-master-main-box">
-      <h2>Society Information</h2>
-      <div>
-        <RequiredFields />
-        {societyInputData.map((item, index) => (
-          <div key={`society-master-index:${index}`}>
-            <label htmlFor={item.name}>
-              {item.label}
-              <RequiredStar isShow={item.required} />:
-            </label>
-            <TextField
-              name={item.name}
-              label={item.label}
-              id={item.name}
+    <>
+      <RequiredFields />
+      {societyInputData.map((item, index) => (
+        <div className="master-input-box" key={`society-master-index:${index}`}>
+          <label className="master-input-box-label" htmlFor={item.name}>
+            {item.label}
+            <RequiredStar isShow={item.required} />:
+          </label>
+          <TextField
+            name={item.name}
+            value={(singleSocietyDetailInput as any)[item.name]}
+            id={item.name}
+            type={item.type}
+            onChange={handleTextInputChange}
+            required={item.required}
+            sx={{ width: "70%" }}
+            variant="outlined"
+            size="small"
+          />
+        </div>
+      ))}
+      <section className="master-field-box-section">
+        <ForwardBackwardBtn
+          arrayLength={props.societyDetails.length}
+          nextBackState={goBackNextState}
+          setNextBackState={setGoBackNextState}
+        />
+        <section>
+          <Tooltip title="Update" placement="top">
+            <Button
+              sx={{ margin: "0 5px" }}
+              color="warning"
+              variant="contained"
+              size="small"
+              startIcon={<Update />}
+            >
+              Update
+            </Button>
+          </Tooltip>
+          <Tooltip title="Save" placement="top">
+            <Button
+              sx={{ margin: "0 5px" }}
+              color="success"
+              disabled
+              variant="contained"
+              size="small"
+              startIcon={<Save />}
+            >
+              Save
+            </Button>
+          </Tooltip>
+          <Tooltip title="Delete" placement="top">
+            <Button
+              sx={{ margin: "0 5px" }}
+              color="error"
+              disabled
               variant="outlined"
               size="small"
-              required={item.required}
-            />
-          </div>
-        ))}
-        <section>
-          <section>
-            <Tooltip title="Go Back" placement="top">
-              <IconButton aria-label="back" size="large">
-                <ArrowBackIosNew />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Go Next" placement="top">
-              <IconButton aria-label="forward" size="large">
-                <ArrowForwardIos />
-              </IconButton>
-            </Tooltip>
-          </section>
-          <section>
-            <Tooltip title="Update" placement="top">
-              <Button
-                sx={{ margin: "0 5px" }}
-                color="warning"
-                variant="contained"
-                size="small"
-                startIcon={<Update />}
-              >
-                Update
-              </Button>
-            </Tooltip>
-            <Tooltip title="Save" placement="top">
-              <Button
-                sx={{ margin: "0 5px" }}
-                color="success"
-                disabled
-                variant="contained"
-                size="small"
-                startIcon={<Save />}
-              >
-                Save
-              </Button>
-            </Tooltip>
-            <Tooltip title="Delete" placement="top">
-              <Button
-                sx={{ margin: "0 5px" }}
-                color="error"
-                disabled
-                variant="outlined"
-                size="small"
-                startIcon={<Delete />}
-              >
-                Delete
-              </Button>
-            </Tooltip>
-          </section>
+              startIcon={<Delete />}
+            >
+              Delete
+            </Button>
+          </Tooltip>
         </section>
-      </div>
-    </div>
+      </section>
+    </>
   );
 };
 

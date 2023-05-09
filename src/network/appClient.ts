@@ -27,7 +27,8 @@ appClient.interceptors.response.use(
           toastError(error.response.data.msg);
           break;
         case 401:
-          // handle unauthorized error
+          localStorage.clear();
+          sessionStorage.clear();
           break;
         case 404:
           // handle not found error
