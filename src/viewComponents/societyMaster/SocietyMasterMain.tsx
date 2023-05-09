@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import SocietyMasterBox from "./SocietyMasterBox";
 import NotAvailable from "@/commonComponents/NotAvailable";
 import MainBox from "@/commonComponents/MainBox";
+import { CircularProgress } from "@mui/material";
 
 const SocietyMasterMain = () => {
   const [societyDetails, setSocietyDetails] =
@@ -24,9 +25,13 @@ const SocietyMasterMain = () => {
         heading="Society Information"
         component={
           societyDetails ? (
-            <SocietyMasterBox societyDetails={societyDetails} />
+            societyDetails.length === 0 ? (
+              <NotAvailable label="Society data" />
+            ) : (
+              <SocietyMasterBox societyDetails={societyDetails} />
+            )
           ) : (
-            <NotAvailable label="Society data" />
+            <CircularProgress />
           )
         }
       />

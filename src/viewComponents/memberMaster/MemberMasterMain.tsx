@@ -4,6 +4,7 @@ import MemberMasterBox from "./MemberMasterBox";
 import { MemberDetailType } from "@/types/authTypes";
 import appClient from "@/network/appClient";
 import MainBox from "@/commonComponents/MainBox";
+import { CircularProgress } from "@mui/material";
 
 const MemberMasterMain = () => {
   const [memberDetails, setMemberDetails] = useState<MemberDetailType[]>();
@@ -23,9 +24,13 @@ const MemberMasterMain = () => {
         heading="Member Information"
         component={
           memberDetails ? (
-            <MemberMasterBox memberDetails={memberDetails} />
+            memberDetails.length === 0 ? (
+              <NotAvailable label="Members data" />
+            ) : (
+              <MemberMasterBox memberDetails={memberDetails} />
+            )
           ) : (
-            <NotAvailable label="Members data" />
+            <CircularProgress />
           )
         }
       />
