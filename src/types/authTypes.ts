@@ -60,3 +60,18 @@ export interface MemberDetailType {
   transfer: MasterTransferDetailType[];
   bank: MasterBankDetailType[];
 }
+
+export interface PreviousWaterReadingType {
+  water_reading_id: number;
+  water_reading: string;
+  reading_date: string;
+  apartment: number;
+  apartment_info: {
+    apartment_number: string;
+    member: {
+      member_id: number;
+      member_name: string;
+    };
+    society_id: number;
+  };
+}

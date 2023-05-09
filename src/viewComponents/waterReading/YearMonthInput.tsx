@@ -10,7 +10,25 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-const YearMonthInput = () => {
+const months = [
+  { value: 1, name: "January" },
+  { value: 2, name: "Febuary" },
+  { value: 3, name: "March" },
+  { value: 4, name: "April" },
+  { value: 5, name: "May" },
+  { value: 6, name: "June" },
+  { value: 7, name: "July" },
+  { value: 8, name: "August" },
+  { value: 9, name: "September" },
+  { value: 10, name: "October" },
+  { value: 11, name: "November" },
+  { value: 12, name: "December" },
+];
+
+const YearMonthInput = (props: {
+  setPreviousWaterReadings: any;
+  setIsApiCalling: any;
+}) => {
   const [waterReadingInputs, setWaterReadingInputs] = useState({
     year: 0,
     month: 1,
@@ -22,21 +40,6 @@ const YearMonthInput = () => {
     }[]
   >();
   const [societyId, setSocietyId] = useState(0);
-
-  const months = [
-    { value: 1, name: "January" },
-    { value: 2, name: "Febuary" },
-    { value: 3, name: "March" },
-    { value: 4, name: "April" },
-    { value: 5, name: "May" },
-    { value: 6, name: "June" },
-    { value: 7, name: "July" },
-    { value: 8, name: "August" },
-    { value: 9, name: "September" },
-    { value: 10, name: "October" },
-    { value: 11, name: "November" },
-    { value: 12, name: "December" },
-  ];
 
   useEffect(() => {
     getSocietyList();
@@ -55,16 +58,19 @@ const YearMonthInput = () => {
   };
 
   const handleOnClick = async () => {
+    props.setIsApiCalling(true);
     let res = await appClient.get(
       `/water-reading/${societyId}/${waterReadingInputs.year}/${waterReadingInputs.month}`
     );
+    props.setPreviousWaterReadings(res.data);
+    props.setIsApiCalling(false);
   };
 
   return (
     <>
       <RequiredFields />
-      <fieldset className="border-black mt-5">
-        <legend className="px-5 mx-5">Show Previous Meter Readings</legend>
+      <fieldset className="border-black mt-10">
+        <legend className="px-5 mx-5">Previous Meter Readings Inputs</legend>
         <FormControl required sx={{ m: 1, minWidth: 200 }}>
           <InputLabel id="demo-select-small-label">Society</InputLabel>
           <Select
@@ -117,7 +123,7 @@ const YearMonthInput = () => {
 
         <Button
           onClick={handleOnClick}
-          sx={{ m: 1, minWidth: 200, height: "100%" }}
+          sx={{ m: 1, minWidth: 200 }}
           variant="contained"
           size="large"
         >
